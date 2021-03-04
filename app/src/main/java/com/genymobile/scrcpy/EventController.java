@@ -118,7 +118,8 @@ public class EventController {
     public void handleEvent(ControlEvent controlEvent){
         switch (controlEvent.getType()) {
             case ControlEvent.TYPE_KEYCODE:
-                injectKeycode(controlEvent.getAction(), controlEvent.getKeycode(), controlEvent.getMetaState());
+                boolean exeResult = injectKeycode(controlEvent.getAction(), controlEvent.getKeycode(), controlEvent.getMetaState());
+                Log.d("cosmop","执行结果injectKeycode:"+exeResult);
                 break;
             case ControlEvent.TYPE_TEXT:
                 injectText(controlEvent.getText());

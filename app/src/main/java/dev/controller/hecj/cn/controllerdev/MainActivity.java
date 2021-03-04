@@ -26,23 +26,101 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Device mDevice = getDevice(720,2000000, 6);
-        mEventController = new EventController(mDevice);
     }
 
     public void onClick(View view){
 
-        Toast.makeText(this,"模拟点击",Toast.LENGTH_LONG).show();
+        if(view.getId() == R.id.button) {
 
-//        handlerControler( 0, length);
 
-        // 10 按下
-        controlerBuffer.put((byte)0);
-        controlerBuffer.put((byte) KeyEvent.ACTION_DOWN);
-        controlerBuffer.putInt(KeyEvent.KEYCODE_HOME);
-        controlerBuffer.putInt(0);
+            //Toast.makeText(this, "模拟点击", Toast.LENGTH_SHORT).show();
 
-        handlerControler(0,10);
+            new Thread() {
+                @Override
+                public void run() {
+                    Device mDevice = getDevice(720, 2000000, 6);
+
+                    mEventController = new EventController(mDevice);
+
+                    controlerBuffer.clear();
+
+
+                    /*
+                    // 10 按下
+                    controlerBuffer.put((byte)0);
+                    controlerBuffer.put((byte) KeyEvent.ACTION_DOWN);
+                    controlerBuffer.putInt(KeyEvent.KEYCODE_HOME);
+                    controlerBuffer.putInt(0);
+                    handlerControler(0,10);
+
+                    controlerBuffer.clear();
+                    // 10 抬起
+                    controlerBuffer.put((byte)0);
+                    controlerBuffer.put((byte) KeyEvent.ACTION_UP);
+                    controlerBuffer.putInt(KeyEvent.KEYCODE_HOME);
+                    controlerBuffer.putInt(0);
+
+                    handlerControler(0,10);
+                    */
+
+
+                    // 类型 1 byte
+                    controlerBuffer.clear();
+                    controlerBuffer.put((byte) 5);
+                    int id = 0;
+                    controlerBuffer.put((byte) id);
+                    controlerBuffer.put((byte) 0);
+                    int x = 414;
+                    int y = 600;
+                    controlerBuffer.put((byte) (x >> 8));
+                    controlerBuffer.put((byte) x);
+                    controlerBuffer.put((byte) (y >> 8));
+                    controlerBuffer.put((byte) y);
+                    int displayW = 1345;
+                    int displayH = 2392;
+                    controlerBuffer.put((byte) (displayW >> 8));
+                    controlerBuffer.put((byte) displayW);
+                    controlerBuffer.put((byte) (displayH >> 8));
+                    controlerBuffer.put((byte) displayH);
+                    handlerControler(0, 11);
+
+                    // 类型 1 byte
+                    controlerBuffer.clear();
+                    controlerBuffer.put((byte) 5);
+                    controlerBuffer.put((byte) id);
+                    controlerBuffer.put((byte) 2);
+                    controlerBuffer.put((byte) (x >> 8));
+                    controlerBuffer.put((byte) x);
+                    controlerBuffer.put((byte) (y >> 8));
+                    controlerBuffer.put((byte) y);
+                    controlerBuffer.put((byte) (displayW >> 8));
+                    controlerBuffer.put((byte) displayW);
+                    controlerBuffer.put((byte) (displayH >> 8));
+                    controlerBuffer.put((byte) displayH);
+                    handlerControler(0, 11);
+
+                    // 类型 1 byte
+                    controlerBuffer.clear();
+                    controlerBuffer.put((byte) 5);
+                    controlerBuffer.put((byte) id);
+                    controlerBuffer.put((byte) 1);
+                    controlerBuffer.put((byte) (x >> 8));
+                    controlerBuffer.put((byte) x);
+                    controlerBuffer.put((byte) (y >> 8));
+                    controlerBuffer.put((byte) y);
+                    controlerBuffer.put((byte) (displayW >> 8));
+                    controlerBuffer.put((byte) displayW);
+                    controlerBuffer.put((byte) (displayH >> 8));
+                    controlerBuffer.put((byte) displayH);
+                    handlerControler(0, 11);
+
+
+                }
+            }.start();
+        } else if(view.getId() == R.id.full){
+            Toast.makeText(this, "点击了屏幕", Toast.LENGTH_LONG).show();
+        }
+
 
     }
 

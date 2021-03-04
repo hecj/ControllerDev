@@ -4,14 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:orientation="vertical"
     >
+
+    <Button
+        android:id="@+id/full"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:text="半个屏幕"
+        android:onClick="onClick"
+        />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="模拟点击"
+        android:layout_marginTop="100dp"
         android:onClick="onClick"
         />
 
